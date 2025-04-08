@@ -19,7 +19,7 @@ public class MainController {
     public Annonucement header(HttpServletRequest request)
     {
         System.out.println(request.getRemoteAddr());
-        return new Annonucement("Welcome on our great page", "Read the Bible!");
+        return new Annonucement("Welcome on our great page", "Read the Bible!!");
     }
     @PostMapping("/register")
     public Annonucement register(@RequestBody User user)
