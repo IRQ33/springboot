@@ -1,8 +1,10 @@
 package com.irq3.app.Controllers;
 
 import com.irq3.app.Models.Annonucement;
+import com.irq3.app.Models.DTOMessage;
 import com.irq3.app.Models.RegisterAnnonucement;
 import com.irq3.app.Models.User;
+import com.irq3.app.Services.ArticleService;
 import com.irq3.app.Services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ public class MainController {
 
     @Autowired
     UserService service;
+    @Autowired
+    ArticleService articleService;
     @GetMapping("/")
     public Annonucement header(HttpServletRequest request)
     {
@@ -32,4 +36,12 @@ public class MainController {
     {
         return service.login(user);
     }
+
+    @PostMapping("/create")
+    public RegisterAnnonucement post(@RequestBody DTOMessage message)
+    {
+        articleService.makeMessage(message);
+        return new RegisterAnnonucement("Made", message.toString());
+    }
+
 }

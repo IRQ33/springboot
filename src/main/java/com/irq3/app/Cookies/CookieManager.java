@@ -10,15 +10,19 @@ import java.util.HashMap;
 
 @Service
 public class CookieManager {
-    private final HashMap<User, Cookie> cookieList = new HashMap<>();
+    private final HashMap<Cookie, User> cookieList = new HashMap<>();
 
     public void add(Cookie cookie, User user)
     {
-        cookieList.put(user,cookie);
+        cookieList.put(cookie,user);
     }
     public void remove(Cookie cookie)
     {
         cookieList.remove(cookie);
+    }
+    public User getUser(Cookie cookie)
+    {
+        return cookieList.get(cookie);
     }
 
     @Scheduled(fixedRate = 600000)
@@ -28,7 +32,7 @@ public class CookieManager {
 
         while (iterator.hasNext()) {
             var entry = iterator.next();
-            Cookie cookie = entry.getValue();
+            Cookie cookie = entry.getKey();
 
             if (cookie.getTime().plusMinutes(10).isBefore(LocalDateTime.now())) {
                 iterator.remove();

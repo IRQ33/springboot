@@ -1,21 +1,28 @@
 package com.irq3.app.Models;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "articles")
 public class Message {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     String header;
     String description;
-    User user;
+    User author;
     LocalDateTime time;
 
     public Message() {
         this.time = LocalDateTime.now();
     }
 
-    public Message(String header, String description, User user) {
+    public Message(String header, String description, User author) {
         this.header = header;
         this.description = description;
-        this.user = user;
+        this.author = author;
         this.time = LocalDateTime.now();
     }
 
@@ -35,12 +42,12 @@ public class Message {
         this.description = description;
     }
 
-    public User getUser() {
-        return user;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
     public LocalDateTime getTime() {
@@ -56,7 +63,7 @@ public class Message {
         return "Message{" +
                 "header='" + header + '\'' +
                 ", description='" + description + '\'' +
-                ", user=" + user +
+                ", user=" + author +
                 ", time=" + time +
                 '}';
     }
