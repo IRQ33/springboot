@@ -1,8 +1,6 @@
-package com.irq3.app.Cookies;
+package com.irq3.app.Models;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.UUID;
 
 public class Cookie {
@@ -19,10 +17,6 @@ public class Cookie {
     }
 
     public UUID getUuid() {
-        if (time.plusMinutes(10).isBefore(LocalDateTime.now()))
-        {
-            throw new RuntimeException("issue");
-        }
         return uuid;
     }
 }

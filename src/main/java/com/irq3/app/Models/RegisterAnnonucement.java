@@ -1,16 +1,22 @@
 package com.irq3.app.Models;
 
-import com.irq3.app.Cookies.Cookie;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.UUID;
 
 public class RegisterAnnonucement extends Annonucement{
+    @Autowired
+
     Cookie cookie;
-    public RegisterAnnonucement(String header, String description) {
+    public RegisterAnnonucement(String header, String description, Cookie cookie) {
         super(header, description);
-        cookie = new Cookie();
+        this.cookie = cookie;
+    }
+    public RegisterAnnonucement(String header, String description)
+    {
+        super(header,description);
     }
     public UUID getUUID()
     {
