@@ -1,14 +1,14 @@
 package com.irq3.app.Controllers;
 
-import com.irq3.app.Models.Annonucement;
-import com.irq3.app.Models.DTOMessage;
-import com.irq3.app.Models.RegisterAnnonucement;
-import com.irq3.app.Models.User;
+import com.irq3.app.Cookies.CookieManager;
+import com.irq3.app.Models.*;
 import com.irq3.app.Services.ArticleService;
 import com.irq3.app.Services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -38,10 +38,15 @@ public class MainController {
     }
 
     @PostMapping("/create")
-    public RegisterAnnonucement post(@RequestBody DTOMessage message)
+    public Annonucement post(@RequestBody DTOMessage message)
     {
         articleService.makeMessage(message);
-        return new RegisterAnnonucement("Made", message.toString());
+        return new Annonucement("Made", message.build(articleService.getManager()).toString());
+    }
+    @GetMapping("/articles")
+    public List<Message> messageList()
+    {
+        return articleService.getList();
     }
 
 }

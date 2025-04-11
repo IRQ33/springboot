@@ -7,8 +7,6 @@ import java.time.format.FormatStyle;
 import java.util.UUID;
 
 public class RegisterAnnonucement extends Annonucement{
-    @Autowired
-
     Cookie cookie;
     public RegisterAnnonucement(String header, String description, Cookie cookie) {
         super(header, description);

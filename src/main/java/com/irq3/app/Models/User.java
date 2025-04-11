@@ -1,6 +1,7 @@
 package com.irq3.app.Models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -57,5 +58,9 @@ public class User {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 '}';
+    }
+    @JsonIgnore
+    public Cookie getCookie() {
+        return null;
     }
 }

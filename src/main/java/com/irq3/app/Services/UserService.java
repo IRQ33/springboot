@@ -17,14 +17,10 @@ public class UserService {
 
     public RegisterAnnonucement createUser(User user)
     {
-        RegisterAnnonucement announcement = new RegisterAnnonucement("User created", user.toString());
-        if(announcement.getUUID() != null) {
-            repository.save(user);
-            Cookie cookie = new Cookie();
-            manager.add(cookie, user);
-            return new RegisterAnnonucement("User created",user.toString(), cookie);
-        }
-        return new RegisterAnnonucement("failed","we didnt make it");
+        repository.save(user);
+        Cookie cookie = new Cookie();
+        manager.add(cookie, user);
+        return new RegisterAnnonucement("User created",user.toString(), cookie);
     }
     public void deleteUserById(int id)
     {
@@ -52,10 +48,13 @@ public class UserService {
             {
                 Cookie cookie = new Cookie();
                 manager.add(cookie, user);
-                return new RegisterAnnonucement("Logged", user.toString());
+                return new RegisterAnnonucement("Logged", user.toString(), cookie);
             }
         }
         return new RegisterAnnonucement("Problem", "Can't log in");
     }
 
+    public CookieManager getManager() {
+        return manager;
+    }
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.UUID;
 
 @Service
 public class CookieManager {
@@ -20,9 +21,13 @@ public class CookieManager {
     {
         cookieList.remove(cookie);
     }
-    public User getUser(Cookie cookie)
-    {
-        return cookieList.get(cookie);
+    public User getUser(UUID uuid) {
+        for (var entry : cookieList.entrySet()) {
+            if (entry.getKey().getUuid().equals(uuid)) {
+                return entry.getValue();
+            }
+        }
+        return null;
     }
 
     @Scheduled(fixedRate = 600000)

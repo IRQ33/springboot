@@ -12,13 +12,13 @@ public class Message {
     private Long id;
     String header;
     String description;
+    @ManyToOne
     User author;
     LocalDateTime time;
 
     public Message() {
         this.time = LocalDateTime.now();
     }
-
     public Message(String header, String description, User author) {
         this.header = header;
         this.description = description;
