@@ -1,6 +1,5 @@
 package com.irq3.app.Services;
 
-import com.irq3.app.Cookies.CookieManager;
 import com.irq3.app.Models.DTOMessage;
 import com.irq3.app.Models.Message;
 import com.irq3.app.Repositories.ArticleRepository;
