@@ -4,12 +4,11 @@ import com.irq3.app.Cookies.CookieManager;
 import com.irq3.app.Models.DTOMessage;
 import com.irq3.app.Models.Message;
 import com.irq3.app.Repositories.ArticleRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -17,13 +16,11 @@ import java.util.List;
 public class ArticleService {
     @Autowired
     ArticleRepository repository;
-    @Autowired
-    CookieManager manager;
 
-    public ResponseEntity<String> makeMessage(DTOMessage message)
+    public void makeMessage(DTOMessage message, HttpSession session)
     {
-        repository.save(message.build(manager));
-        return new ResponseEntity<>(HttpStatus.OK);
+        repository.save(message.build(session));
+        new ResponseEntity<>(HttpStatus.OK);
     }
 
     public void deleteMessage(int i)
@@ -35,7 +32,4 @@ public class ArticleService {
         return repository.findAll();
     }
 
-    public CookieManager getManager() {
-        return manager;
-    }
 }

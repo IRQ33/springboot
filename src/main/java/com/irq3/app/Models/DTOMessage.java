@@ -1,8 +1,7 @@
 package com.irq3.app.Models;
 
-import com.irq3.app.Cookies.CookieManager;
+import jakarta.servlet.http.HttpSession;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class DTOMessage {
@@ -14,12 +13,9 @@ public class DTOMessage {
         this.description = description;
         this.cookie = cookie;
     }
-    public Message build(CookieManager manager)
+    public Message build(HttpSession session)
     {
-        UUID uuid = UUID.fromString(cookie);
-        System.out.println(uuid.toString());
-        User user = manager.getUser(uuid);
-        System.out.println(user.toString());
+        User user = (User) session.getAttribute("user");
         return new Message(this.header, this.description, user);
     }
 }

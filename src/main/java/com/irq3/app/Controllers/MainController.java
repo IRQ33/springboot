@@ -1,10 +1,10 @@
 package com.irq3.app.Controllers;
 
-import com.irq3.app.Cookies.CookieManager;
 import com.irq3.app.Models.*;
 import com.irq3.app.Services.ArticleService;
 import com.irq3.app.Services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,22 +26,22 @@ public class MainController {
         return new Annonucement("Welcome on our great page", "Read the Bible!!");
     }
     @PostMapping("/register")
-    public Annonucement register(@RequestBody User user)
+    public Annonucement register(@RequestBody User user, HttpSession session)
     {
-        return service.createUser(user);
+        return service.createUser(user,session);
     }
 
     @PostMapping("/login")
-    public RegisterAnnonucement login(@RequestBody User user)
+    public RegisterAnnonucement login(@RequestBody User user, HttpSession session)
     {
-        return service.login(user);
+        return service.login(user,session);
     }
 
     @PostMapping("/create")
-    public Annonucement post(@RequestBody DTOMessage message)
+    public Annonucement post(@RequestBody DTOMessage message, HttpSession session)
     {
-        articleService.makeMessage(message);
-        return new Annonucement("Made", message.build(articleService.getManager()).toString());
+        articleService.makeMessage(message, session);
+        return new Annonucement("Made", message.build(session).toString());
     }
     @GetMapping("/articles")
     public List<Message> messageList()

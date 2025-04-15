@@ -1,25 +1,21 @@
 package com.irq3.app.Models;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.servlet.http.HttpSession;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.UUID;
 
 public class RegisterAnnonucement extends Annonucement{
-    Cookie cookie;
-    public RegisterAnnonucement(String header, String description, Cookie cookie) {
+    String session;
+    public RegisterAnnonucement(String header, String description, HttpSession session) {
         super(header, description);
-        this.cookie = cookie;
+        this.session = session.getId();
     }
     public RegisterAnnonucement(String header, String description)
     {
         super(header,description);
     }
-    public UUID getUUID()
-    {
-        return cookie.getUuid();
-    }
+
 
     @Override
     public String toString() {
@@ -27,7 +23,7 @@ public class RegisterAnnonucement extends Annonucement{
                 "header='" + this.getHeader() + '\'' +
                 ", description='" + this.getDescription() + '\'' +
                 ", date=" + DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(this.getDate()) +
-                "cookie=" + this.getUUID() +
+                "cookie=" + this. session+
                 '}';
     }
 }
